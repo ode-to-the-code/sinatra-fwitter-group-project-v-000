@@ -1,9 +1,15 @@
 class TweetsController < ApplicationController
 
 
-  get '/' do  
-    @tweets = Tweet.all
-    erb :index
+  get '/tweets' do
+    # binding.pry
+    if current_user
+        # binding.pry
+      @tweets = Tweet.all
+      erb :"tweets/index"
+    else 
+      redirect "/login"
+    end
   end 
 
 
