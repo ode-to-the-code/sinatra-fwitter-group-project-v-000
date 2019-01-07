@@ -11,6 +11,15 @@ class TweetsController < ApplicationController
       redirect "/login"
     end
   end 
+  
+  get '/tweets/new' do 
+    erb :"tweets/new"
+  end 
+  
+  post '/tweets/new' do 
+    # binding.pry
+    @tweet = Tweet.new(content: params[:content])
+  end 
 
 
 end

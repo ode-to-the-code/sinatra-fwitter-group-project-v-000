@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   end 
   
   get "/users/:id" do 
-    binding.pry
+    # binding.pry
     @user = User.find_by(params[:user_id]).tweets
     erb :show
   end 
