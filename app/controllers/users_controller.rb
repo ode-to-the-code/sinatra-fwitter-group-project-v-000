@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   
   get '/login' do 
     # binding.pry 
-      if session[:id]
+      if logged_in?
         redirect '/tweets'
       else 
         # erb :'users/new'
@@ -45,8 +45,9 @@ class UsersController < ApplicationController
     # binding.pry
     @user = User.find_by(username: params[:username])
     # session[:id] = @user.id
-    if @user.authenticate(params[:password])
-      session[:id] = @user.id
+        # binding.pry
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect '/tweets'
     end 
   end 
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
   get '/logout' do 
     # binding.pry
     # if current_user?
-    if session[:id]
+    if session[:user_id]
       session.clear
       puts "you've been logged out"
       redirect "/login"
