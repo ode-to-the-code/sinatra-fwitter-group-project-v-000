@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   
   get '/signup' do
-    if session[:id]
+    if session[:user_id]
       # binding.pry
       redirect "/tweets"
     else 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
         # binding.pry
-        session[:id] = @user.id
+        session[:user_id] = @user.id
     else 
       redirect '/signup'
     end 
@@ -49,6 +49,8 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/tweets'
+    else 
+      redirect "/login"
     end 
   end 
   

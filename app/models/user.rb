@@ -8,5 +8,9 @@ class User < ActiveRecord::Base
     self.username.downcase.split(" ").join("-")
   end 
   
+  def self.find_by_slug(slug)
+    # binding.pry
+    User.find_by(username: slug.split("-").join(" "))
+  end 
 end 
 
