@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-
-
+# in terms of being a CRUD app, a user is able to create, read update and delete one. but only one of its own. a tweet can do the same thing. 
+# gliffy diagrams can help make charts and diagrams to see connections. 
   
   get '/signup' do
     if session[:user_id]
-      # binding.pry
+      binding.pry
       redirect "/tweets"
     else 
       erb :'users/new'
